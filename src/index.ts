@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const UPLOAD_DIR = process.env.UPLOAD_DIR || './uploads';
 
 // Middleware
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:4200')
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:4200,https://reading-metrics-db.vercel.app')
   .split(',')
   .map((o) => o.trim());
 
