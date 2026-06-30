@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 3000;
 const UPLOAD_DIR = process.env.UPLOAD_DIR || './uploads';
 
 // Middleware
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:4200,https://reading-metrics-db.vercel.app')
+const allowedOrigins = (
+  process.env.FRONTEND_URL || 'http://localhost:4200,https://reading-metrics-db.vercel.app'
+)
   .split(',')
   .map((o) => o.trim());
 
@@ -27,8 +29,12 @@ app.use(
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   }),
 );
+
+// Respond to preflight requests
+app.options('*', cors());
 app.use(express.json());
 app.use(fileUpload({ limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE || '500000000') } }));
 
